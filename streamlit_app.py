@@ -35,6 +35,6 @@ pd_prod_data = table_prod_data.to_pandas()
 
 # Display the selected product details
 st.image(image=url, width=400, caption=product_caption)
-st.markdown('**Price:** '+ price)
-st.markdown('**Sizes Available:** ' + size_list)
-st.markdown('**Also Consider:** ' + upsell)
+st.markdown(f"**Price:** {price}")
+st.markdown(f"**Sizes Available:** {size_list}")
+st.markdown(f"**Also Consider:** {upsell}")

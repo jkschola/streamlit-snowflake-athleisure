@@ -14,7 +14,8 @@ session = get_active_session()
 table_colors = session.sql("SELECT color_or_style FROM catalog_for_website")
 pd_colors = table_colors.to_pandas()
 
-
+# Convert the list of colors into a dropdown selector in the Streamlit app
+option = st.selectbox('Pick a sweatsuit color or style:', pd_colors)
 
 
 

@@ -26,18 +26,22 @@ WHERE color_or_style = %s;
 table_prod_data = session.sql(query, params=[option])  # Using parameterized query to prevent SQL injection
 pd_prod_data = table_prod_data.to_pandas()
 
-# Assign values from the returned row to variables
-  price = f"${pd_prod_data['PRICE'].iloc[0]:.2f}"  # Ensures proper currency formatting
-  file_name = pd_prod_data['FILE_NAME'].iloc[0]
-  size_list = pd_prod_data['SIZE_LIST'].iloc[0]
-  upsell = pd_prod_data['UPSELL_PRODUCT_DESC'].iloc[0]
-  url = pd_prod_data['FILE_URL'].iloc[0]
+# Check if data was returned before proceeding (to avoid errors)
+if not pd_prod_data.empty:
+    # Assign values from the returned row to variables
+    price = f"${pd_prod_data['PRICE'].iloc[0]:.2f}"  # Ensures proper currency formatting
+    file_name = pd_prod_data['FILE_NAME'].iloc[0]
+    size_list = pd_prod_data['SIZE_LIST'].iloc[0]
+    upsell = pd_prod_data['UPSELL_PRODUCT_DESC'].iloc[0]
+    url = pd_prod_data['FILE_URL'].iloc[0]
 
-# Display the selected product details
-st.image(image=url, width=400, caption=product_caption)
-st.markdown(f"**Price:** {price}")
-st.markdown(f"**Sizes Available:** {size_list}")
-st.markdown(f"**Also Consider:** {upsell}")
+    # Display the selected product details
+    st.image(image=url, width=400, caption=product_caption)
+    st.markdown(f"**Price:** {price}")
+    st.markdown(f"**Sizes Available:** {size_list}")
+    st.markdown(f"**Also Consider:** {upsell}")
 
-# Display the image URL for reference
-st.write(url)
+    # Display the image URL for reference
+    st.write(url)
+else:
+    st.error("No product data found for the selected color/style. Please try another option.")

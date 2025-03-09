@@ -18,8 +18,13 @@ pd_colors = table_colors.to_pandas()
 option = st.selectbox('Pick a sweatsuit color or style:', pd_colors['COLOR_OR_STYLE'])  # Fixed column reference
 
 # Fetch product details from the database based on the selected color/style
-table_prod_data = session.sql("select file_name, price, size_list, upsell_product_desc, file_url from catalog_for_website where color_or_style = '" + option + "';")
-pd_prod_data = table_prod_data.to_pandas() 
+query = f"""
+SELECT file_name, price, size_list, upsell_product_desc, file_url 
+FROM catalog_for_website 
+WHERE color_or_style = %s;
+"""
+table_prod_data = session.sql(query, params=[option])  # Using parameterized query to prevent SQL injection
+pd_prod_data = table_prod_data.to_pandas()
 
 
 

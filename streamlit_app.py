@@ -27,10 +27,10 @@ table_prod_data = session.sql(query, params=[option])  # Using parameterized que
 pd_prod_data = table_prod_data.to_pandas()
 
 # Assign values from the returned row to variables
-price = '$' + str(pd_prod_data['PRICE'].iloc[0])+'0'
-file_name = pd_prod_data['FILE_NAME'].iloc[0]
-size_list = pd_prod_data['SIZE_LIST'].iloc[0]
-upsell = pd_prod_data['UPSELL_PRODUCT_DESC'].iloc[0]
-url = pd_prod_data['FILE_URL'].iloc[0]
+  price = f"${pd_prod_data['PRICE'].iloc[0]:.2f}"  # Ensures proper currency formatting
+  file_name = pd_prod_data['FILE_NAME'].iloc[0]
+  size_list = pd_prod_data['SIZE_LIST'].iloc[0]
+  upsell = pd_prod_data['UPSELL_PRODUCT_DESC'].iloc[0]
+  url = pd_prod_data['FILE_URL'].iloc[0]
 
 

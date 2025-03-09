@@ -6,3 +6,10 @@ import pandas as pd
 
 # Set up the Streamlit app title
 st.title("Zena's Amazing Athleisure Catalog")
+
+# Establish a connection to the active Snowflake session
+session = get_active_session()
+
+
+
+

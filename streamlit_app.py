@@ -38,3 +38,6 @@ st.image(image=url, width=400, caption=product_caption)
 st.markdown(f"**Price:** {price}")
 st.markdown(f"**Sizes Available:** {size_list}")
 st.markdown(f"**Also Consider:** {upsell}")
+
+# Display the image URL for reference
+st.write(url)
